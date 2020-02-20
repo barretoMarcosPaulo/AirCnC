@@ -7,12 +7,10 @@ function App() {
 
   const [email, setEmail] = useState('')
 
-  async function handleSubmit(event){
-    event.preventDefault()
-    
-    const response = await api.post('/sessions',{ email })
-    alert(response)
-
+   async function handleSubmit(event) {
+      event.preventDefault()
+      const response = api.post('/sessions',{email})
+      console.log(response)
   }
 
   return (
