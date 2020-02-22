@@ -4,7 +4,7 @@ import './App.css';
 import logo from './assets/logo.svg'
 
 import Routes from './routes'
-import { Route } from 'react-router-dom';
+
 
 function App() {
 
