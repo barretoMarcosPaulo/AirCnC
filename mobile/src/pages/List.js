@@ -1,6 +1,10 @@
 import React,{useState,useEffect} from 'react'
-import { StyleSheet, AsyncStorage, Platform, KeyboardAvoidingView, View, Image, Text, TextInput, TouchableOpacity } from 'react-native'
+import { StyleSheet, AsyncStorage, SafeAreaView, Platform, KeyboardAvoidingView, View, Image, Text, TextInput, TouchableOpacity } from 'react-native'
 import api from '../services/api'
+
+import SpotList from '../components/SpotList'
+
+import logo from '../assets/logo.png'
 
 export default function List() {
     const [techs,setTechs] = useState([])
@@ -13,8 +17,25 @@ export default function List() {
     },[])
     
     return (
-        <View>
+        <SafeAreaView style={styles.container}>
+            <Image style={styles.logo} source={logo} />
             
-        </View>
+            {techs.map(tech=>{
+                <SpotList key={tech} tech={tech} />
+            })}
+
+        </SafeAreaView>
     )
 }
+
+const styles = StyleSheet.create({
+    container : {
+        flex: 1,
+    },
+    logo : {
+        marginTop: 50,
+        height: 32,
+        resizeMode: 'contain',
+        alignSelf: 'center'
+    }
+})
