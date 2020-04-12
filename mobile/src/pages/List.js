@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { StyleSheet, AsyncStorage, SafeAreaView, Platform, KeyboardAvoidingView, View, Image, Text, TextInput, TouchableOpacity } from 'react-native'
+import { StyleSheet, ScrollView, AsyncStorage, SafeAreaView, Platform, KeyboardAvoidingView, View, Image, Text, TextInput, TouchableOpacity } from 'react-native'
 import api from '../services/api'
 
 import SpotList from '../components/SpotList'
@@ -19,10 +19,9 @@ export default function List() {
     return (
         <SafeAreaView style={styles.container}>
             <Image style={styles.logo} source={logo} />
-            
-            {techs.map(tech=>{
-                <SpotList key={tech} tech={tech} />
-            })}
+            <ScrollView>
+                {techs.map(tech => <SpotList key={tech} tech={tech} /> )}
+            </ScrollView>
 
         </SafeAreaView>
     )
