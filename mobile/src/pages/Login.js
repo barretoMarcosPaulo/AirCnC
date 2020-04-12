@@ -1,11 +1,38 @@
-import React from 'react'
-import {StyleSheet,KeyboardAvoidingView,View,Image,Text,TextInput,TouchableOpacity} from 'react-native'
+import React,{useState,useEffect} from 'react'
+import {StyleSheet,AsyncStorage,Platform,KeyboardAvoidingView,View,Image,Text,TextInput,TouchableOpacity} from 'react-native'
+import api from '../services/api'
 
 import logo from '../assets/logo.png'
-export default function  Login() {
-    
+
+export default function  Login({navigation}) {
+    const[email,setEmail] = useState('')
+    const [techs, setTechs] = useState('')
+
+    useEffect(()=>{
+        AsyncStorage.getItem('user').then(user=>{
+            if(user){
+                navigation.navigate('List')
+            }
+        })
+    },[])
+
+    async function handleSubmit(){
+        const response = await api.post('/sessions',{
+            email,
+            techs
+        }) 
+
+        const {_id} = response.data
+
+        await AsyncStorage.setItem('user',_id)
+        await AsyncStorage.setItem('techs',techs)
+
+        navigation.navigate('List')
+
+    }
+
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView enabled={Platform.OS == "ios"} behavior="padding" style={styles.container}>
             <Image source={logo} />
 
             <View style={styles.form}>
@@ -17,6 +44,8 @@ export default function  Login() {
                 keyboardType="email-address"
                 autoCapitalize="none"
                 autoCorrect={false}
+                value={email}
+                onChangeText={setEmail}
                 />
 
 
@@ -27,13 +56,15 @@ export default function  Login() {
                     placeholderTextColor="#999"
                     autoCapitalize="words"
                     autoCorrect={false}
+                    value={techs}
+                    onChangeText={setTechs}
                 />
 
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={handleSubmit}>
                     <Text style={styles.buttontext}>Encontrar Spots</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </KeyboardAvoidingView>
     )
 }
 
