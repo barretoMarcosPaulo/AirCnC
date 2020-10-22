@@ -17,10 +17,4 @@ Projeto desenvolvido durante a semana omnistack 9 da rocketset. O objetivo era d
 
 # Aplicativo Mobile(ReactNative)
 
-
-<img src="screenshots/app1.jpg" alt="drawing" width="180"/>
-<img src="screenshots/app2.jpg" alt="drawing" width="180"/>
-<img src="screenshots/app3.jpg" alt="drawing" width="180"/>
-<img src="screenshots/app4.jpg" alt="drawing" width="180"/>
-<img src="screenshots/app5.jpg" alt="drawing" width="180"/>
-
+![Imagem1](screenshots/app.png)
